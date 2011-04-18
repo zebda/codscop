@@ -1,0 +1,25 @@
+CodScop
+
+Code analyzing tool for computing sloc and other metrics of code.
+
+
+DESCRIPTION
+If you want to know how many lines of code your project have or some other 
+metrics of your project then CodScop can help you.
+
+FEATURES
+- Packages, classes, functions and inner classes are counted.
+- XML output (planned).
+- 100% Pure Scala.
+- Free software (GNU GPL).
+
+SYSTEM REQUIREMENTS
+Java JDK >= 1.6
+
+LICENSE
+GNU LGPL 3.0
+
+AUTHORS
+Anton Nehaev, <nehaev@gmail.com>
+Zablotskaya Anna, <zablotskaya.anya@gmail.com>
+
