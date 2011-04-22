@@ -4,14 +4,11 @@ import util.parsing.combinator.syntactical.StandardTokenParsers
 import util.parsing.combinator.ImplicitConversions
 import util.parsing.combinator.token.{StdTokens, Tokens}
 
-/**
- * Created by IntelliJ IDEA.
- * User: anton
- * Date: 19.03.11
- * Time: 2:28
- * To change this template use File | Settings | File Templates.
- */
 
+
+/**
+ * @author anton
+ */
 class JavaParser extends StandardTokenParsers with ImplicitConversions {
 	override type Tokens = StdTokens
 	override val lexical = new JavaLexer

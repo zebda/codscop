@@ -13,7 +13,6 @@ import java.net.URL;
 
 /**
  * @author anton
- *
  */
 object App1 {
 

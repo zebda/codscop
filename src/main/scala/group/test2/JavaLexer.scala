@@ -4,14 +4,11 @@ import util.parsing.combinator.lexical.StdLexical
 import scala.util.parsing.input.CharArrayReader.EofCh
 import util.parsing.input.{Position, Positional}
 
-/**
- * Created by IntelliJ IDEA.
- * User: anton
- * Date: 20.03.11
- * Time: 1:10
- * To change this template use File | Settings | File Templates.
- */
 
+
+/**
+ * @author anton
+ */
 class JavaLexer extends StdLexical {
 
 	override def token: Parser[Token] = {

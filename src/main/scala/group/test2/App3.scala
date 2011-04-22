@@ -1,17 +1,13 @@
 package group.test2
 
-/**
- * Created by IntelliJ IDEA.
- * User: anton
- * Date: 19.03.11
- * Time: 2:40
- * To change this template use File | Settings | File Templates.
- */
-
 
 import scala.io.Source
 import org.apache.commons.lang.StringUtils
 
+
+/**
+ * @author anton
+ */
 object App3  {
 
 

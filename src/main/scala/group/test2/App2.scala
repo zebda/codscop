@@ -1,13 +1,8 @@
 package group.test2
 
 /**
- * Created by IntelliJ IDEA.
- * User: anton
- * Date: 03.03.11
- * Time: 0:46
- * To change this template use File | Settings | File Templates.
+ * @author anton
  */
-
 object App2 {
 
 	def main(args: Array[String]): Unit = {

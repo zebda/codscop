@@ -1,13 +1,8 @@
 package group.test2
 
 /**
- * Created by IntelliJ IDEA.
- * User: anton
- * Date: 29.03.11
- * Time: 10:37
- * To change this template use File | Settings | File Templates.
+ * @author anton
  */
-
 case class CodeStructure(kind: String) {//, subStructures: List[CodeStructure]) {
 
 
