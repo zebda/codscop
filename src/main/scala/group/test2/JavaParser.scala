@@ -82,6 +82,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 			| staticConstructorDeclaration
 			| fieldDeclaration
 			| comment
+			| block ^^^ CodeStructure("in-class block")
 			| ";" ^^^ CodeStructure("garbage")
 			//| anyBut ("}", a=>"<any>")
 			//| unknown ^^^ "" 				//^^ { (s:String)=> println(s);s}
