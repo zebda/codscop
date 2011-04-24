@@ -67,10 +67,10 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 
 
 	def classDeclaration: Parser[ClassStructure] = (
-			modifiers ~ "class" ~ ident
+			modifiers ~ ("class" | "interface") ~ ident
 			~ rep(anyBut("{", a=>"<any>"))
 			~ classBody
-	)	^^ {case ms ~ _ ~ id ~ _ ~ cb  => ClassStructure(ms, id.toString, cb)} //"<class> " + id.toString + cb.toString }
+	)	^^ {case ms ~ sk ~ id ~ _ ~ cb  => ClassStructure(ms, sk, id.toString, cb)} //"<class> " + id.toString + cb.toString }
 
 
 	def classBody: Parser[List[CodeStructure]] =  (

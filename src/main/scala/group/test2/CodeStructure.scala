@@ -64,9 +64,10 @@ case class FieldStructure(modifiers: List[String], override val name: String)
 }
 
 
-case class ClassStructure(modifiers: List[String], override val name: String, substructures: List[CodeStructure])
+case class ClassStructure(modifiers: List[String], subkind: String,
+						  override val name: String, substructures: List[CodeStructure])
 		extends NamedCodeStructure("class", name) with Modifiers with Substructures {
 
-	override def toString = "%s: %s {%s}".format(
-		super.toString, modifiers mkString ", ", "\n\t" + (substructures mkString "\n\t"))
+	override def toString = "%s: %s %s {%s}".format(
+		super.toString, subkind, modifiers mkString ", ", "\n\t" + (substructures mkString "\n\t"))
 }
