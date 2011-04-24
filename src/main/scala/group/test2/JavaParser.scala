@@ -3,8 +3,7 @@ package group.test2
 import util.parsing.combinator.syntactical.StandardTokenParsers
 import util.parsing.combinator.ImplicitConversions
 import util.parsing.combinator.token.{StdTokens, Tokens}
-
-
+import collection.immutable.List._
 
 /**
  * @author anton
@@ -48,6 +47,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 	def compilationUnit : Parser[List[String]] = (
 		rep1(
 			classDeclaration                ^^ (_.toString)
+			| enumDeclaration               ^^ (_.toString)
 			| packageDeclaration            ^^ (_.toString)
 			| importDeclaration				^^ (_.toString)
 			| comment                       ^^ (_.toString)
@@ -73,22 +73,46 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 	)	^^ {case ms ~ sk ~ id ~ _ ~ cb  => ClassStructure(ms, sk, id.toString, cb)} //"<class> " + id.toString + cb.toString }
 
 
-	def classBody: Parser[List[CodeStructure]] =  (
-		"{"
-		~> rep(
-			classDeclaration
-			| methodDeclaration
-			| constructorDeclaration
-			| staticConstructorDeclaration
-			| fieldDeclaration
-			| comment
-			| block ^^^ CodeStructure("in-class block")
-			| ";" ^^^ CodeStructure("garbage")
-			//| anyBut ("}", a=>"<any>")
-			//| unknown ^^^ "" 				//^^ { (s:String)=> println(s);s}
-		)
-		<~ "}"
+	def classBody: Parser[List[CodeStructure]] =
+		"{" ~> rep(classMember) <~ "}"
+
+	def classMember = (
+		classDeclaration
+		| enumDeclaration
+		| methodDeclaration
+		| constructorDeclaration
+		| staticConstructorDeclaration
+		| fieldDeclaration
+		| comment
+		| block ^^^ CodeStructure("in-class block")
+		| ";" ^^^ CodeStructure("garbage")
+		//| anyBut ("}", a=>"<any>")
+		//| unknown ^^^ "" 				//^^ { (s:String)=> println(s);s}
 	)
+
+
+	def enumDeclaration: Parser[ClassStructure] = (
+			modifiers ~ "enum" ~ ident
+			~ rep(anyBut("{", a=>"<any>"))
+			~ enumBody
+	)	^^ {case ms ~ sk ~ id ~ _ ~ cb  => ClassStructure(ms, sk, id.toString, cb)}
+
+	def enumBody = (
+			"{"
+			~> opt(enumConstant ~ rep("," ~> enumConstant) <~ opt(",")	^^ {case first ~ rest => (first :: rest)})
+			~ opt(";" ~> rep(classMember))
+			<~ "}"
+	)	^^ {case ems ~ cms => {
+				var members: List[CodeStructure] = Nil
+				if (ems.isDefined) members = ems.get ::: members
+				if (cms.isDefined) members = cms.get ::: members
+				members
+			}
+	}
+
+	def enumConstant =
+	    modifiers ~> ident <~ opt(formalParameters) <~ opt(classBody)	^^ (NamedCodeStructure("enumConstant", _))
+
 
 	def packageDeclaration =
 		"package" ~> name <~ ";"	^^ (NamedCodeStructure("package", _))
@@ -116,7 +140,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 	)	^^ {case ms ~ t ~ id => new FieldStructure(ms, id.toString)}
 
 	def variableDeclaration =
-		ident ~ rep("," ~> ident)
+		ident ~ rep("," ~> ident) //FIXME: return a list of vars
 
 	def block: Parser[List[String]] =	"{" ~> rep(statement ^^ { _.toString }) <~ "}" // ^^ { _.toString }
 

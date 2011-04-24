@@ -36,7 +36,6 @@ object App1 {
 				.filter(path => path.endsWith(".java"))
 				.sortWith(_.compareTo(_) < 0)
 				.foreach(measure2)
-
 	}
 
 
@@ -60,7 +59,7 @@ object App1 {
 
 
 
-	def measure2(path: String): Unit = {
+	def measure2(path: String): List[String] = {
 		var s:String = null;
 		try {
 			s = Source.fromFile(path, "UTF-8")
@@ -69,18 +68,19 @@ object App1 {
 		} catch {
 			case e: Exception => System.err.println("-"+path); //e.printStackTrace()
 		}
-		if (s == null) return;
+		if (s == null) return Nil;
 
 		println(path)
 		val result = new JavaParser().parse(s)
 		if (!result.isDefined) {
 			println("NONE")
-			return
+			return Nil
 		}
 		val cons = result.get
 		//println(cons)
 		println(cons filter((x:String)=>
 		x.startsWith("<any>"))) //	x.startsWith("<class>") || x.startsWith("<method>")))
+		return cons
 	}
 
 
