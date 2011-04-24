@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98d916aa-1325-49b0-8bb5-baab8403f320" name="Default" comment="Added source code to repo">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Codscop.iml" afterPath="$PROJECT_DIR$/Codscop.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestIdeaProject.ipr" afterPath="$PROJECT_DIR$/TestIdeaProject.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestIdeaProject.iws" afterPath="$PROJECT_DIR$/TestIdeaProject.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/group/test2/App3.scala" afterPath="$PROJECT_DIR$/src/main/scala/group/test2/App3.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/group/test2/JavaParser.scala" afterPath="$PROJECT_DIR$/src/main/scala/group/test2/JavaParser.scala" />
@@ -499,7 +497,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added source code to repo" />
+    <option name="LAST_COMMIT_MESSAGE" value="idea conf updated" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -514,6 +512,7 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Added readme file." />
     <MESSAGE value="Added source code to repo" />
+    <MESSAGE value="idea conf updated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />

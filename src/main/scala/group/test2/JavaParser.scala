@@ -26,7 +26,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 		)
 	lexical.reserved ++= modifierKeys
 
-	lexical.delimiters += (".", ",", ";", "@", ":", "{", "}", "(", ")", "<", ">", "[", "]", "*", "?")
+	lexical.delimiters += (".", ",", ";", "@", ":", "{", "}", "(", ")", "<", ">", "[", "]", "*", "?", "=")
 							//"+", "-", "/", "*", "%", "&&", "||")
 
 	def parse(s : String) : Option[List[String]] = {
@@ -62,6 +62,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 			| constructorDeclaration        ^^ (_.toString)
 			| staticConstructorDeclaration  ^^ (_.toString)
 			| fieldDeclaration              ^^ (_.toString)
+			| markerAnnotation              ^^ (_.toString)
 	)
 
 
@@ -134,7 +135,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 
 	def annotation = markerAnnotation
 
-	def markerAnnotation = "@" ~> name   ^^ (attr => "@" + attr)
+	def markerAnnotation = "@" ~> name <~ opt(formalParameters)   ^^ (attr => "@" + attr)
 
 	def name =
 		ident ~ opt(typeParams) ~ rep("." ~> ident ~ opt(typeParams)) ^^ {case first ~ rest => (first :: rest) mkString "."}
