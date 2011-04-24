@@ -109,10 +109,13 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 
 	def fieldDeclaration = (
 			modifiers ~ typeRef
-			~ ident
+			~ variableDeclaration
 			<~ opt("=" ~ rep(anyBut(";", a=>"<any>")))
 			<~ ";"
 	)	^^ {case ms ~ t ~ id => new FieldStructure(ms, id.toString)}
+
+	def variableDeclaration =
+		ident ~ rep("," ~> ident)
 
 	def block: Parser[List[String]] =	"{" ~> rep(statement ^^ { _.toString }) <~ "}" // ^^ { _.toString }
 
