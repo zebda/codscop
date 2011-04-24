@@ -109,7 +109,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 
 	def fieldDeclaration = (
 			modifiers ~ typeRef
-			~ ident <~ opt("[" ~ "]")
+			~ ident
 			<~ opt("=" ~ rep(anyBut(";", a=>"<any>")))
 			<~ ";"
 	)	^^ {case ms ~ t ~ id => new FieldStructure(ms, id.toString)}
@@ -125,7 +125,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 
 	//def formalParameter = modifiers ~ typeRef ~ opt("...") ~ ident
 
-	def typeRef: Parser[String] = name
+	def typeRef: Parser[String] = name <~ opt("[" ~ "]")
 
 	def modifiers = rep(modifier | annotation)
 
