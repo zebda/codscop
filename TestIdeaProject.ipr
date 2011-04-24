@@ -32,7 +32,7 @@
       <facet-type id="scala">
         <modules>
           <module name="Codscop" />
-          <module name="TestIdeaProject" />
+          <module name="Codscop" />
         </modules>
       </facet-type>
     </autodetection-disabled>
@@ -206,17 +206,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/commons-lang/commons-lang/2.6/commons-lang-2.6-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: junit:junit:4.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.1/junit-4.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.1/junit-4.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.1/junit-4.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.scala-lang:scala-compiler-bundle:WrappedArray(2.8.1)">
