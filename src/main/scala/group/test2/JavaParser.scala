@@ -172,7 +172,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 		"<" ~> typeParam ~ rep("," ~ typeParam) <~ ">"  ^^ {case first ~ rest => (first :: rest) mkString "."}
 
 	def typeParam =
-		opt(("?" | ident) ~ ("extends" | "super")) ~> typeRef
+		("?" | typeRef) ~ opt(("extends" | "super") ~> typeRef)
 
 	def unknown = elem("any", !_.equals(lexical.EOF)) ^^ (a => "<any>" + a.toString)
 

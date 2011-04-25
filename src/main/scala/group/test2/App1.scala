@@ -34,6 +34,10 @@ object App1 {
 		findScripts(res.getFile)
 				.map(url => url.getFile())
 				.filter(path => path.endsWith(".java"))
+				.filter(f =>
+					!f.endsWith("Test120.java")    //uses 'enum' keyword as identifier
+					&& !f.endsWith("Test127.java") //wrong constructor signature
+				)
 				.sortWith(_.compareTo(_) < 0)
 				.foreach(measure2)
 	}
