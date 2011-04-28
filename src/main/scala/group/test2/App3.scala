@@ -14,7 +14,7 @@ object App3  {
 	def main(args: Array[String]): Unit = {
 
 		var file = "/home/anton/Temp/AppCore.java"
-		file = "/home/anton/Temp/TestIdeaProject/src/main/resources/group/test2/Test101.java"
+		file = "/home/anton/Temp/TestIdeaProject/src/main/resources/group/test2/Test144.java"
 
 		val s = Source.fromFile(file, "UTF-8")
 				.getLines()

@@ -48,6 +48,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 		rep1(
 			classDeclaration                ^^ (_.toString)
 			| enumDeclaration               ^^ (_.toString)
+			| annotationDeclaration         ^^ (_.toString)
 			| packageDeclaration            ^^ (_.toString)
 			| importDeclaration				^^ (_.toString)
 			| comment                       ^^ (_.toString)
@@ -79,6 +80,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 	def classMember = (
 		classDeclaration
 		| enumDeclaration
+		| annotationDeclaration
 		| methodDeclaration
 		| constructorDeclaration
 		| staticConstructorDeclaration
@@ -114,6 +116,13 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 	    modifiers ~> ident <~ opt(formalParameters) <~ opt(classBody)	^^ (NamedCodeStructure("enumConstant", _))
 
 
+	def annotationDeclaration =  (
+			modifiers ~ "@" ~ "interface" ~ ident
+			~ rep(anyBut("{", a=>"<any>"))
+			~ classBody
+	)	^^ {case ms ~ _ ~ _ ~ id ~ _ ~ cb  => ClassStructure(ms, "@interface", id.toString, cb)}
+
+
 	def packageDeclaration =
 		"package" ~> name <~ ";"	^^ (NamedCodeStructure("package", _))
 
@@ -135,12 +144,17 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 	def fieldDeclaration = (
 			modifiers ~ typeRef
 			~ variableDeclaration
-			<~ opt("=" ~ rep(anyBut(";", a=>"<any>")))
+			<~ opt("=" ~ variableInitializer)
 			<~ ";"
 	)	^^ {case ms ~ t ~ id => new FieldStructure(ms, id.toString)}
 
 	def variableDeclaration =
 		ident ~ rep("," ~> ident) //FIXME: return a list of vars
+
+	def variableInitializer = (
+		("new" ~ typeRef ~ formalParameters ~ block)
+		| rep(anyBut(";", a=>"<any>"))
+	)
 
 	def block: Parser[List[String]] =	"{" ~> rep(statement ^^ { _.toString }) <~ "}" // ^^ { _.toString }
 
