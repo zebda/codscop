@@ -149,7 +149,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 	)	^^ {case ms ~ t ~ firstId ~ restIds => new FieldStructure(ms, firstId.toString)}  //FIXME: return a list of vars
 
 	def variableDeclaration =
-		ident <~ opt("[" ~ "]") // ~ rep("," ~> ident )
+		ident <~ rep("[" ~ "]") // ~ rep("," ~> ident )
 
 	def variableInitializer = (
 		("new" ~ typeRef ~ formalParameters ~ block)
