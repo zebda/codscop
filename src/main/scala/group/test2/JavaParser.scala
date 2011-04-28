@@ -135,8 +135,11 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 			<~ (block | ";")
 	)	^^ {case ms ~ tps ~ t ~ id => new MethodStructure(ms, id.toString)}
 
-	def constructorDeclaration =
-		modifiers ~ ident <~ formalParameters <~ block  ^^ {case ms ~ id => MethodStructure(ms, id.toString, true)}
+	def constructorDeclaration = (
+			modifiers ~ ident <~ formalParameters
+			<~ rep(anyBut("{", a=>"<any>"))
+			<~ block
+	)	^^ {case ms ~ id => MethodStructure(ms, id.toString, true)}
 
 	def staticConstructorDeclaration =
 		"static" ~ block		^^^ MethodStructure("static" :: Nil, "", true)
