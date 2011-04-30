@@ -14,7 +14,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 	import lexical.{Comment}
 
 	val modifierKeys = Array(
-			"public", "protected", "private", "final", "static", "abstract", "synchronized", "native", "transient", "volatile")
+			"public", "protected", "private", "final", "static", "abstract", "synchronized", "native", "transient", "volatile", "strictfp")
 
 	lexical.reserved += (
 			"package", "import",
@@ -36,7 +36,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 	//		println(tokens.first)
 	//		tokens = tokens.rest
 	//	}
-		//return None
+	//	return None
 		phrase(compilationUnit)(tokens) match {
       		case Success(result, _) => Some(result)
       		case _ => None
@@ -175,7 +175,7 @@ class JavaParser extends StandardTokenParsers with ImplicitConversions {
 	def modifiers = rep(modifier | annotation)
 
 	def modifier = (
-		"public" | "protected" | "private" | "final" | "static" | "abstract" | "synchronized" | "native" | "transient" | "volatile"
+		"public" | "protected" | "private" | "final" | "static" | "abstract" | "synchronized" | "native" | "transient" | "volatile" | "strictfp"
 	) //^^ { (m:String) => m}
 
 	def annotation = markerAnnotation

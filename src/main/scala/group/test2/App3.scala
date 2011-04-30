@@ -13,8 +13,8 @@ object App3  {
 
 	def main(args: Array[String]): Unit = {
 
-		var file = "/home/anton/Temp/AppCore.java"
-		file = "/home/anton/Temp/TestIdeaProject/src/main/resources/group/test2/Test31.java"
+		var file = "/home/anton/Temp/Test38.java" //AppCore.java"
+		file = "/home/anton/Temp/TestIdeaProject/src/main/resources/group/test2/Test56.java"
 
 		val s = Source.fromFile(file, "UTF-8")
 				.getLines()

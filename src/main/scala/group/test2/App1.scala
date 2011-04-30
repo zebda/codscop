@@ -37,6 +37,7 @@ object App1 {
 				.filter(f =>
 					!f.endsWith("Test120.java")    //uses 'enum' keyword as identifier
 					&& !f.endsWith("Test127.java") //wrong constructor signature
+					&& !f.endsWith("Test42.java")  //wrong method signature
 				)
 				.sortWith(_.compareTo(_) < 0)
 				.foreach(measure2)
@@ -77,7 +78,7 @@ object App1 {
 		println(path)
 		val result = new JavaParser().parse(s)
 		if (!result.isDefined) {
-			println("NONE")
+			println("NONE!!!!!")
 			return Nil
 		}
 		val cons = result.get
